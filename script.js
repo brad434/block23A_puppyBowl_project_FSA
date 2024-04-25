@@ -205,7 +205,64 @@ const renderAllPlayers = playerList => {
  * @param {Object} player an object representing a single player
  */
 const renderSinglePlayer = player => {
-  // TODO
+  const main = document.querySelector("main");
+  main.innerHTML = ""; // Clear the current contents of <main>
+
+  // Create card element
+  const card = document.createElement("div");
+  card.className = "card shadow-sm mb-3";
+
+  // Create card body
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+
+  // Name display
+  const nameDisplay = document.createElement("h5");
+  nameDisplay.className = "card-title";
+  nameDisplay.textContent = player.name;
+
+  // ID display
+  const idDisplay = document.createElement("p");
+  idDisplay.textContent = `ID: ${player.id}`;
+  idDisplay.className = "card-text";
+
+  // Breed display
+  const breedDisplay = document.createElement("p");
+  breedDisplay.textContent = `Breed: ${player.breed || "Unknown"}`;
+  breedDisplay.className = "card-text";
+
+  // Image display
+  const imgTag = document.createElement("img");
+  imgTag.className = "img-fluid rounded";
+  imgTag.src = player.image;
+  imgTag.alt = `Image of ${player.name}`;
+
+  // Team name display
+  const teamDisplay = document.createElement("p");
+  teamDisplay.textContent = `Team: ${player.teamName || "Unassigned"}`;
+  teamDisplay.className = "card-text";
+
+  // Back to all players button
+  const backButton = document.createElement("button");
+  backButton.className = "btn btn-primary";
+  backButton.textContent = "Back to all players";
+  backButton.onclick = () => {
+    fetchAllPlayers().then(players => renderAllPlayers(players)); // Fetch and render all players
+  };
+
+  // Append elements to the card body
+  cardBody.appendChild(nameDisplay);
+  cardBody.appendChild(idDisplay);
+  cardBody.appendChild(breedDisplay);
+  cardBody.appendChild(imgTag);
+  cardBody.appendChild(teamDisplay);
+  cardBody.appendChild(backButton);
+
+  // Append the card body to the card
+  card.appendChild(cardBody);
+
+  // Append the card to the main container
+  main.appendChild(card);
 };
 
 /**
