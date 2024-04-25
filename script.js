@@ -132,21 +132,23 @@ const renderAllPlayers = playerList => {
   }
   const main = document.querySelector("main");
   main.innerHTML = "";
+
   console.log(playerList);
   playerList.forEach(player => {
     let card = document.createElement("div");
-    card.className = "card shadow cursor-pointer";
+    card.className = "card shadow  cursor-pointer";
 
     let cardBody = document.createElement("div");
-    cardBody.className = "card-body";
+    cardBody.classList =
+      "card-body d-flex justify-content-center align-items-center flex-column custom-width cursor";
 
     let nameDisplay = document.createElement("h5");
     nameDisplay.innerText = player.name;
     nameDisplay.classList = "card-title";
 
-    let idDisplay = document.createElement("h5");
+    let idDisplay = document.createElement("p");
     idDisplay.innerText = `ID: ${player.id}`;
-    idDisplay.classList = "card-title";
+    idDisplay.classList = "card-text";
 
     let imgTag = document.createElement("img");
     imgTag.classList = "img-fluid rounded-start";
@@ -210,11 +212,11 @@ const renderSinglePlayer = player => {
 
   // Create card element
   const card = document.createElement("div");
-  card.className = "card shadow-sm mb-3";
+  card.classList = "card shadow-sm mb-3";
 
   // Create card body
   const cardBody = document.createElement("div");
-  cardBody.className = "card-body";
+  cardBody.classList = "card-body";
 
   // Name display
   const nameDisplay = document.createElement("h5");
