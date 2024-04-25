@@ -66,6 +66,7 @@ const addNewPlayer = async playerObj => {
     });
     const data = await response.json();
     console.log(data);
+    return data;
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
   }
@@ -80,10 +81,16 @@ const removePlayer = async playerId => {
     const response = await fetch(API_URL + `/${playerId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, breed, status, imageUrl }),
     });
+    if (!response.ok) {
+      // This will handle HTTP errors, not just network errors
+      throw new Error(
+        `Failed to delete player with ID ${playerId}, status code: ${response.status}`
+      );
+    }
     const data = await response.json();
     console.log(data);
+    return data;
   } catch (err) {
     console.error(
       `Whoops, trouble removing player #${playerId} from the roster!`,
@@ -133,7 +140,7 @@ const renderAllPlayers = playerList => {
   const main = document.querySelector("main");
   main.innerHTML = "";
 
-  console.log(playerList);
+  // console.log(playerList);
   playerList.forEach(player => {
     let card = document.createElement("div");
     card.className = "card shadow  cursor-pointer";
@@ -220,22 +227,22 @@ const renderSinglePlayer = player => {
 
   // Name display
   const nameDisplay = document.createElement("h5");
-  nameDisplay.className = "card-title";
+  nameDisplay.classList = "card-title";
   nameDisplay.textContent = player.name;
 
   // ID display
   const idDisplay = document.createElement("p");
   idDisplay.textContent = `ID: ${player.id}`;
-  idDisplay.className = "card-text";
+  idDisplay.classList = "card-text";
 
   // Breed display
   const breedDisplay = document.createElement("p");
   breedDisplay.textContent = `Breed: ${player.breed || "Unknown"}`;
-  breedDisplay.className = "card-text";
+  breedDisplay.classList = "card-text";
 
   // Image display
   const imgTag = document.createElement("img");
-  imgTag.className = "img-fluid rounded";
+  imgTag.classList = "img-fluid rounded";
   imgTag.src = player.image;
   imgTag.alt = `Image of ${player.name}`;
 
