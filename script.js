@@ -112,18 +112,18 @@ const removePlayer = async playerId => {
  * @param {Object[]} playerList - an array of player objects
  */
 
-const player = [
-  {
-    id: 1,
-    name: "John Doe",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    image: "https://via.placeholder.com/150",
-  },
-];
+// const player = [
+//   {
+//     id: 1,
+//     name: "John Doe",
+//     image: "https://via.placeholder.com/150",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     image: "https://via.placeholder.com/150",
+//   },
+// ];
 
 const renderAllPlayers = playerList => {
   // TODO
@@ -173,7 +173,7 @@ const renderAllPlayers = playerList => {
     main.appendChild(card);
   });
 };
-renderAllPlayers(player);
+// renderAllPlayers(player);
 // const { name, id, imageUrl } = fetchAllPlayers(playerList);
 
 // const main = document.getElementById("main");
