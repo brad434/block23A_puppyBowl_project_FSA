@@ -64,6 +64,7 @@ const addNewPlayer = async playerObj => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, breed, status, imageUrl }),
     });
+
     const data = await response.json();
     console.log(data);
     return data;
@@ -159,8 +160,10 @@ const renderAllPlayers = playerList => {
 
     let imgTag = document.createElement("img");
     imgTag.classList = "img-fluid rounded-start";
-    imgTag.src = player.image;
+    imgTag.src = player.imageUrl;
     imgTag.alt = `Image of ${player.name}`;
+    // console.log(player);
+    // console.log(imgTag);
 
     const detailsButton = document.createElement("button");
     detailsButton.classList = "btn btn-primary";
