@@ -18,6 +18,7 @@ const fetchAllPlayers = async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
     state.players = data.data.players;
+    // console.log(data);
     // console.log(state.players);
     return state.players;
   } catch (err) {
@@ -47,7 +48,7 @@ const fetchSinglePlayer = async playerId => {
     console.error(`Oh no, trouble fetching player #${playerId}!`, err);
   }
 };
-// fetchSinglePlayer(3718);
+fetchSinglePlayer(3718);
 
 /**
  * Adds a new player to the roster via the API.
@@ -72,11 +73,18 @@ const addNewPlayer = async playerObj => {
     console.error("Oops, something went wrong with adding that player!", err);
   }
 };
+// addNewPlayer({
+//   name: "LargeDog",
+//   breed: "Cat",
+//   status: "field",
+//   imageUrl: "https://www.google.com/images/largeDog",
+// });
 /**
  * Removes a player from the roster via the API.
  * @param {number} playerId the ID of the player to remove
  */
 const removePlayer = async playerId => {
+  console.log(playerId);
   try {
     // TODO
     const response = await fetch(API_URL + `/${playerId}`, {
@@ -139,7 +147,7 @@ const renderAllPlayers = playerList => {
     return console.log("No new players available");
   }
   const main = document.querySelector("main");
-  main.innerHTML = "";
+  // main.innerHTML = "";
 
   // console.log(playerList);
   playerList.forEach(player => {
@@ -168,12 +176,16 @@ const renderAllPlayers = playerList => {
     const detailsButton = document.createElement("button");
     detailsButton.classList = "btn btn-primary";
     detailsButton.textContent = "See details";
-    detailsButton.onclick = () => renderSinglePlayer(player.id);
+    detailsButton.onclick = () => renderSinglePlayer(player);
 
     const removeButton = document.createElement("button");
     removeButton.classList = "btn btn-danger ms-2";
     removeButton.textContent = "Remove";
-    removeButton.onclick = () => renderSinglePlayer(player.id);
+    // removeButton.onclick = () => {
+    removeButton.addEventListener("click", () => {
+      removePlayer(player.id);
+      location.reload();
+    });
 
     cardBody.appendChild(nameDisplay);
     cardBody.appendChild(idDisplay);
@@ -259,7 +271,8 @@ const renderSinglePlayer = player => {
   backButton.className = "btn btn-primary";
   backButton.textContent = "Back to all players";
   backButton.onclick = () => {
-    fetchAllPlayers().then(players => renderAllPlayers(players)); // Fetch and render all players
+    // fetchAllPlayers().then(players => renderAllPlayers(players));
+    location.reload(); // Fetch and render all players
   };
 
   // Append elements to the card body
@@ -292,11 +305,14 @@ const renderNewPlayerForm = () => {
     const inputImage = document.createElement("input");
     const inputSubmit = document.createElement("button");
 
-    inputName.attributes.name = "name";
-    inputBreed.attributes.name = "breed";
-    inputStatus.attributes.name = "status";
-    inputImage.attributes.name = "image";
-    inputSubmit.attributes.id = "submit";
+    inputName.setAttribute("name", "name");
+    inputBreed.setAttribute("name", "breed");
+    inputStatus.setAttribute("name", "status");
+    inputImage.setAttribute("name", "image");
+    inputSubmit.setAttribute("type", "submit");
+    // inputStatus.attributes.name = "status";
+    // inputImage.attributes.name = "image";
+    // inputSubmit.attributes.id = "submit";
 
     const inputNameLabel = document.createElement("label");
     const inputBreedLabel = document.createElement("label");
@@ -308,7 +324,8 @@ const renderNewPlayerForm = () => {
     inputStatusLabel.textContent = "Status";
     inputImageLabel.textContent = "Image";
 
-    inputSubmit.innerHTML = "Submit";
+    inputSubmit.textContent = "Submit";
+
     const arrayInputs = [
       inputNameLabel,
       inputName,
@@ -332,8 +349,12 @@ const renderNewPlayerForm = () => {
       const breed = inputBreed.value;
       const status = inputStatus.value;
       const imageUrl = inputImage.value;
+
       console.log({ name, breed, status, imageUrl });
       addNewPlayer({ name, breed, status, imageUrl });
+      // .then(response => {
+      //   console.log("Player added:", response);
+      // });
     });
   } catch (err) {
     console.error("Uh oh, trouble rendering the new player form!", err);
