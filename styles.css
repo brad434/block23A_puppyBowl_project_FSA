@@ -3,7 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+/* 
 custom-width {
   width: 300px;
 }
@@ -16,10 +16,9 @@ custom-width {
 .frontImage {
   height: 100px;
   width: 100px;
-  margin-bottom: 30px;
-}
+  /* margin-bottom: 30px; */
 
-/* img {
-  height: 100px;
+img {
+  height: auto;
   width: 100px;
-} */
+}

@@ -38,17 +38,12 @@ const fetchSinglePlayer = async playerId => {
     const response = await fetch(playerURL);
     const data = await response.json();
     console.log(data.data.player);
-    // console.log("this is the players URL", playerURL);
-    // const response = await fetch(API_URL);
-    // const playersArray = data.data.player.find(
-    //   player => player.id === playerId
-    // );
-    // console.log(playersArray);
+    return data.data.player;
   } catch (err) {
     console.error(`Oh no, trouble fetching player #${playerId}!`, err);
   }
 };
-fetchSinglePlayer(3718);
+// fetchSinglePlayer(3718);
 
 /**
  * Adds a new player to the roster via the API.
@@ -68,8 +63,9 @@ const addNewPlayer = async playerObj => {
 
     const data = await response.json();
     console.log(data);
+    return data;
     alert("Success");
-    location.reload();
+    // location.reload();
     return data;
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
@@ -158,7 +154,7 @@ const renderAllPlayers = playerList => {
 
     let cardBody = document.createElement("div");
     cardBody.classList =
-      "card-body d-flex justify-content-center align-items-center flex-column custom-width cursor";
+      "card-body d-flex justify-content-center align-items-center flex-column cursor";
 
     let nameDisplay = document.createElement("h5");
     nameDisplay.innerText = player.name;
@@ -233,7 +229,7 @@ const renderAllPlayers = playerList => {
  */
 const renderSinglePlayer = player => {
   const main = document.querySelector("main");
-  main.innerHTML = ""; // Clear the current contents of <main>
+  main.innerHTML = "";
 
   // Create card element
   const card = document.createElement("div");
