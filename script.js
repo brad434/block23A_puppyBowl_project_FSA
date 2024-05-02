@@ -332,6 +332,7 @@ const renderNewPlayerForm = () => {
     inputImageLabel.textContent = "Image";
 
     inputSubmit.textContent = "Submit";
+    inputSubmit.id = "submit";
 
     const arrayInputs = [
       inputNameLabel,

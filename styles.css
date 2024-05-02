@@ -16,3 +16,7 @@ img {
   height: auto;
   width: 100px;
 }
+
+#submit {
+  margin-left: 20px;
+}
