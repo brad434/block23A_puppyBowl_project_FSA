@@ -145,12 +145,14 @@ const renderAllPlayers = playerList => {
     return console.log("No new players available");
   }
   const main = document.querySelector("main");
-  // main.innerHTML = "";
+  main.innerHTML = "";
 
-  // console.log(playerList);
-  playerList.forEach(player => {
+  let row = document.createElement("div");
+  row.className = "row";
+
+  playerList.forEach((player, index) => {
     let card = document.createElement("div");
-    card.classList = "card shadow  cursor-pointer";
+    card.classList = "card shadow cursor-pointer col-md-4";
 
     let cardBody = document.createElement("div");
     cardBody.classList =
@@ -192,8 +194,13 @@ const renderAllPlayers = playerList => {
     cardBody.appendChild(detailsButton);
     cardBody.appendChild(removeButton);
     card.appendChild(cardBody);
+    row.appendChild(card);
 
-    main.appendChild(card);
+    if ((index + 1) % 3 === 0 || index + 1 === playerList.length) {
+      main.appendChild(row);
+      row = document.createElement("div");
+      row.className = "row";
+    }
   });
 };
 // renderAllPlayers(player);
@@ -349,7 +356,6 @@ const renderNewPlayerForm = () => {
       const breed = inputBreed.value;
       const status = inputStatus.value;
       const imageUrl = inputImage.value;
-
       // imageUrl.classList = "frontImage";
 
       console.log({ name, breed, status, imageUrl });

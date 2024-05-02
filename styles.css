@@ -3,20 +3,14 @@
   margin: 0;
   box-sizing: border-box;
 }
-/* 
-custom-width {
-  width: 300px;
-}
 
-.photoIcon {
-  height: 100px;
-  width: 100px;
+form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-
-.frontImage {
-  height: 100px;
-  width: 100px;
-  /* margin-bottom: 30px; */
 
 img {
   height: auto;
