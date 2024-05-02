@@ -7,3 +7,19 @@
 custom-width {
   width: 300px;
 }
+
+.photoIcon {
+  height: 100px;
+  width: 100px;
+}
+
+.frontImage {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 30px;
+}
+
+/* img {
+  height: 100px;
+  width: 100px;
+} */

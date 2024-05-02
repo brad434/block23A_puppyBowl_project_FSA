@@ -68,6 +68,8 @@ const addNewPlayer = async playerObj => {
 
     const data = await response.json();
     console.log(data);
+    alert("Success");
+    location.reload();
     return data;
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
@@ -91,12 +93,12 @@ const removePlayer = async playerId => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
-    if (!response.ok) {
-      // This will handle HTTP errors, not just network errors
-      throw new Error(
-        `Failed to delete player with ID ${playerId}, status code: ${response.status}`
-      );
-    }
+    // if (!response.ok) {
+    //   // This will handle HTTP errors, not just network errors
+    //   throw new Error(
+    //     `Failed to delete player with ID ${playerId}, status code: ${response.status}`
+    //   );
+    // }
     const data = await response.json();
     console.log(data);
     return data;
@@ -152,7 +154,7 @@ const renderAllPlayers = playerList => {
   // console.log(playerList);
   playerList.forEach(player => {
     let card = document.createElement("div");
-    card.className = "card shadow  cursor-pointer";
+    card.classList = "card shadow  cursor-pointer";
 
     let cardBody = document.createElement("div");
     cardBody.classList =
@@ -167,7 +169,7 @@ const renderAllPlayers = playerList => {
     idDisplay.classList = "card-text";
 
     let imgTag = document.createElement("img");
-    imgTag.classList = "img-fluid rounded-start";
+    imgTag.classList = "img-fluid rounded-start frontImage";
     imgTag.src = player.imageUrl;
     imgTag.alt = `Image of ${player.name}`;
     // console.log(player);
@@ -184,6 +186,7 @@ const renderAllPlayers = playerList => {
     // removeButton.onclick = () => {
     removeButton.addEventListener("click", () => {
       removePlayer(player.id);
+      alert("Its been deleted.");
       location.reload();
     });
 
@@ -257,8 +260,8 @@ const renderSinglePlayer = player => {
 
   // Image display
   const imgTag = document.createElement("img");
-  imgTag.classList = "img-fluid rounded";
-  imgTag.src = player.image;
+  imgTag.classList = "img-fluid rounded photoIcon";
+  imgTag.src = player.imageUrl;
   imgTag.alt = `Image of ${player.name}`;
 
   // Team name display
@@ -310,6 +313,7 @@ const renderNewPlayerForm = () => {
     inputStatus.setAttribute("name", "status");
     inputImage.setAttribute("name", "image");
     inputSubmit.setAttribute("type", "submit");
+    // inputImage.classList = "frontImage";
     // inputStatus.attributes.name = "status";
     // inputImage.attributes.name = "image";
     // inputSubmit.attributes.id = "submit";
@@ -349,6 +353,8 @@ const renderNewPlayerForm = () => {
       const breed = inputBreed.value;
       const status = inputStatus.value;
       const imageUrl = inputImage.value;
+
+      // imageUrl.classList = "frontImage";
 
       console.log({ name, breed, status, imageUrl });
       addNewPlayer({ name, breed, status, imageUrl });
